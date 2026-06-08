@@ -1,0 +1,1533 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>王阳明 | 知行合一</title>
+  <style>
+    :root {
+      --paper: #f4efe2;
+      --paper-deep: #e3d6bd;
+      --ink: #1c1a17;
+      --ink-soft: #4b4740;
+      --cinnabar: #a73522;
+      --cinnabar-dark: #6e2018;
+      --jade: #2f6f62;
+      --jade-deep: #143e38;
+      --gold: #a77b35;
+      --line: rgba(28, 26, 23, 0.16);
+      --shadow: 0 24px 60px rgba(49, 38, 24, 0.18);
+      --glass: rgba(255, 250, 239, 0.5);
+      --glass-strong: rgba(255, 250, 239, 0.68);
+      --glass-edge: rgba(255, 255, 255, 0.52);
+      --glass-shadow: 0 22px 54px rgba(49, 38, 24, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.54);
+      --journey: 0;
+      --lens-shift: 0px;
+      --glass-shift: 0%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 12%, rgba(167, 123, 53, 0.16), transparent 24rem),
+        radial-gradient(circle at 84% 28%, rgba(47, 111, 98, 0.13), transparent 22rem),
+        linear-gradient(90deg, rgba(28, 26, 23, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, var(--paper), #efe5d1 58%, #e9dcc4);
+      background-size: auto, auto, 22px 22px, auto;
+      font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+      line-height: 1.75;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      content: "";
+      opacity: 0.34;
+      background-image:
+        linear-gradient(115deg, rgba(255,255,255,0.34) 0 12%, transparent 12% 100%),
+        repeating-radial-gradient(circle at 18% 24%, rgba(28,26,23,0.08) 0 1px, transparent 1px 5px);
+      mix-blend-mode: multiply;
+    }
+
+    body::after {
+      position: fixed;
+      inset: -12%;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      opacity: 0.18;
+      background:
+        repeating-linear-gradient(105deg, transparent 0 2rem, rgba(28, 26, 23, 0.045) 2rem 2.08rem),
+        linear-gradient(90deg, transparent, rgba(255, 248, 234, 0.52), transparent);
+      animation: paperBreath 18s ease-in-out infinite alternate;
+      mix-blend-mode: multiply;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .ink-wash {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 18% 50%, rgba(28, 26, 23, 0.22), transparent 24%),
+        radial-gradient(ellipse at 62% 44%, rgba(47, 111, 98, 0.16), transparent 28%),
+        linear-gradient(90deg, rgba(244, 239, 226, 0.98), rgba(244, 239, 226, 0.72), rgba(244, 239, 226, 0));
+      transform-origin: left center;
+      animation: inkWash 1450ms cubic-bezier(.73,.02,.24,.98) forwards;
+    }
+
+    .liquid-lens {
+      position: fixed;
+      inset: -24% -18%;
+      z-index: 12;
+      pointer-events: none;
+      opacity: 0.2;
+      background:
+        linear-gradient(118deg, transparent 0 37%, rgba(255, 255, 255, 0.42) 43%, rgba(255, 248, 234, 0.12) 49%, transparent 57% 100%),
+        repeating-linear-gradient(98deg, transparent 0 2.9rem, rgba(255, 255, 255, 0.12) 2.9rem 3.02rem, transparent 3.02rem 4.8rem);
+      filter: blur(0.4px);
+      mix-blend-mode: soft-light;
+      transform: translate3d(0, var(--lens-shift), 0) rotate(-6deg);
+      transition: opacity 240ms ease;
+    }
+
+    .camera-rail {
+      position: fixed;
+      top: 50%;
+      right: 1.15rem;
+      z-index: 32;
+      width: 0.72rem;
+      height: 13.5rem;
+      padding: 0.16rem;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.12)),
+        rgba(255, 250, 239, 0.18);
+      box-shadow: 0 14px 36px rgba(49, 38, 24, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(18px) saturate(1.36);
+      -webkit-backdrop-filter: blur(18px) saturate(1.36);
+      transform: translateY(-50%);
+      overflow: hidden;
+    }
+
+    .camera-rail::before {
+      position: absolute;
+      inset: 0.16rem;
+      border-radius: 6px;
+      background: linear-gradient(180deg, rgba(28, 26, 23, 0.12), rgba(47, 111, 98, 0.2));
+      content: "";
+      opacity: 0.36;
+    }
+
+    .camera-rail span {
+      position: absolute;
+      right: 0.16rem;
+      bottom: 0.16rem;
+      left: 0.16rem;
+      height: calc(100% - 0.32rem);
+      border-radius: 6px;
+      background: linear-gradient(180deg, rgba(167, 53, 34, 0.95), rgba(47, 111, 98, 0.9));
+      box-shadow: 0 0 18px rgba(167, 53, 34, 0.32);
+      transform: scaleY(var(--journey));
+      transform-origin: bottom;
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      overflow: hidden;
+      perspective: 1300px;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 5vw;
+      color: rgba(28, 26, 23, 0.84);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 239, 0.78), rgba(255, 250, 239, 0.32) 74%, transparent),
+        rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46);
+      backdrop-filter: blur(20px) saturate(1.28);
+      -webkit-backdrop-filter: blur(20px) saturate(1.28);
+      animation: navDrop 720ms ease-out both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+    }
+
+    .seal-mark {
+      display: grid;
+      width: 2.25rem;
+      height: 2.25rem;
+      place-items: center;
+      color: #fff8ea;
+      background: var(--cinnabar);
+      border: 2px solid rgba(110, 32, 24, 0.28);
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,0.15);
+      font-size: 1.05rem;
+      line-height: 1;
+      animation: sealPop 860ms cubic-bezier(.2,1.55,.32,1) 280ms both;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.18rem;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-links a::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: var(--cinnabar);
+      content: "";
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 220ms ease;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: transparent;
+      color: var(--cinnabar-dark);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(19rem, 27rem);
+      align-items: center;
+      gap: 4rem;
+      padding: 8rem 7vw 5rem;
+      isolation: isolate;
+      --hero-drift: 0px;
+      --shot-y: 0px;
+      --shot-scale: 1;
+    }
+
+    .shot-scene {
+      transform: translate3d(0, var(--shot-y, 0px), 0) scale(var(--shot-scale, 1));
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+    }
+
+    .hero::before {
+      right: -5rem;
+      bottom: -5rem;
+      width: 44rem;
+      height: 22rem;
+      opacity: 0.72;
+      background:
+        radial-gradient(ellipse at 18% 88%, rgba(20, 62, 56, 0.46) 0 21%, transparent 21.5%),
+        radial-gradient(ellipse at 45% 85%, rgba(47, 111, 98, 0.44) 0 25%, transparent 25.5%),
+        radial-gradient(ellipse at 72% 88%, rgba(20, 62, 56, 0.38) 0 20%, transparent 20.5%);
+      filter: blur(1px);
+      translate: 0 var(--hero-drift);
+      animation: mountainMist 11s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      top: 7rem;
+      left: -8rem;
+      width: 28rem;
+      height: 28rem;
+      border: 1px solid rgba(167, 123, 53, 0.28);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 5rem rgba(167, 123, 53, 0.035);
+      animation: circleTrace 1300ms ease-out 260ms both;
+    }
+
+    .hero-copy {
+      position: relative;
+      max-width: 46rem;
+    }
+
+    .hero-copy > * {
+      animation: rise 880ms ease-out both;
+    }
+
+    .hero-copy .hero-title-row {
+      animation-delay: 120ms;
+    }
+
+    .hero-copy .hero-lede {
+      animation-delay: 240ms;
+    }
+
+    .hero-copy .hero-actions {
+      animation-delay: 360ms;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 0 1.5rem;
+      color: var(--cinnabar-dark);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .kicker::before {
+      display: inline-block;
+      width: 3.5rem;
+      height: 1px;
+      background: var(--cinnabar);
+      content: "";
+      transform-origin: left;
+      animation: strokeReveal 880ms ease-out 180ms both;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 5.8rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-shadow: 0 0 1px rgba(28, 26, 23, 0.18), 0 18px 34px rgba(49, 38, 24, 0.08);
+    }
+
+    .hero-title-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .name-note {
+      margin-bottom: 0.4rem;
+      color: var(--ink-soft);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .hero-lede {
+      max-width: 41rem;
+      margin: 1.8rem 0 2rem;
+      color: var(--ink-soft);
+      font-size: 1.18rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.9rem;
+      padding: 0.55rem 1.2rem;
+      border: 1px solid var(--ink);
+      color: var(--paper);
+      background: var(--ink);
+      font-weight: 700;
+      overflow: hidden;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .btn::after {
+      position: absolute;
+      inset: -40% auto -40% -55%;
+      width: 42%;
+      background: linear-gradient(90deg, transparent, rgba(255, 248, 234, 0.48), transparent);
+      content: "";
+      transform: skewX(-18deg) translateX(0);
+      transition: transform 520ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(28, 26, 23, 0.2);
+      background: var(--cinnabar-dark);
+    }
+
+    .btn:hover::after {
+      transform: skewX(-18deg) translateX(390%);
+    }
+
+    .btn.secondary {
+      color: var(--ink);
+      background: rgba(244, 239, 226, 0.54);
+      border-color: rgba(28, 26, 23, 0.28);
+    }
+
+    .btn.secondary:hover {
+      color: var(--paper);
+      background: var(--jade-deep);
+    }
+
+    .scroll-panel {
+      position: relative;
+      min-height: 35rem;
+      padding: 2.2rem 1.3rem;
+      background:
+        linear-gradient(90deg, rgba(106, 69, 28, 0.14), transparent 7%, transparent 93%, rgba(106, 69, 28, 0.14)),
+        linear-gradient(180deg, #f9f3e5, #eadabd);
+      border: 1px solid rgba(106, 69, 28, 0.24);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px) saturate(1.08);
+      -webkit-backdrop-filter: blur(8px) saturate(1.08);
+      translate: 0 var(--scroll-drift, 0px);
+      transition: transform 260ms ease, box-shadow 260ms ease;
+      animation: unfurl 900ms ease-out 160ms both, scrollGlow 4.8s ease-in-out 1.1s infinite alternate;
+      will-change: transform, translate;
+    }
+
+    .scroll-panel::before,
+    .scroll-panel::after {
+      position: absolute;
+      right: -0.75rem;
+      left: -0.75rem;
+      height: 1.5rem;
+      border-radius: 99px;
+      background:
+        linear-gradient(90deg, #6f3e1b, #c49a52 28%, #7b451e 72%, #4f2c17);
+      box-shadow: inset 0 2px 7px rgba(255,255,255,0.26), 0 8px 18px rgba(43, 28, 12, 0.25);
+      content: "";
+    }
+
+    .scroll-panel::before {
+      top: -0.72rem;
+    }
+
+    .scroll-panel::after {
+      bottom: -0.72rem;
+    }
+
+    .vertical-title {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      justify-content: center;
+      gap: 1.1rem;
+      min-height: 26rem;
+      color: rgba(28, 26, 23, 0.94);
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+
+    .vertical-title strong {
+      font-size: 3.3rem;
+      line-height: 1;
+      animation: inkSet 760ms ease-out 720ms both;
+    }
+
+    .vertical-title span {
+      align-self: center;
+      color: var(--jade-deep);
+      font-size: 1.45rem;
+      font-weight: 700;
+      animation: inkSet 760ms ease-out 900ms both;
+    }
+
+    .stamp {
+      position: absolute;
+      right: 2rem;
+      bottom: 3rem;
+      display: grid;
+      width: 5rem;
+      height: 5rem;
+      place-items: center;
+      color: rgba(255, 248, 234, 0.92);
+      background: var(--cinnabar);
+      border: 4px double rgba(255, 248, 234, 0.7);
+      transform: rotate(-7deg);
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: center;
+      animation: stampIn 680ms cubic-bezier(.23,1.32,.38,1) 980ms both, sealBreath 3.2s ease-in-out 1.8s infinite alternate;
+    }
+
+    .section {
+      position: relative;
+      padding: 5.8rem 7vw;
+      --shot-y: 0px;
+      --shot-scale: 1;
+    }
+
+    .section-inner {
+      max-width: 70rem;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2.4rem;
+    }
+
+    .section-index {
+      color: var(--cinnabar-dark);
+      font-size: 0.92rem;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 2.45rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .section-intro {
+      max-width: 43rem;
+      margin: 0.85rem 0 0;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 1.2rem;
+    }
+
+    .bio-main,
+    .thought-card,
+    .quote-card,
+    .timeline-item {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 250, 239, 0.22) 42%, rgba(255, 248, 234, 0.38)),
+        var(--glass);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(22px) saturate(1.22);
+      -webkit-backdrop-filter: blur(22px) saturate(1.22);
+      transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+    }
+
+    .bio-main::before,
+    .quote-card::after,
+    .timeline-item::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background:
+        linear-gradient(132deg, rgba(255, 255, 255, 0.62) 0 12%, transparent 38% 100%),
+        linear-gradient(58deg, transparent 0 54%, rgba(255, 255, 255, 0.16) 58%, transparent 66%);
+      content: "";
+      opacity: 0.72;
+      transform: translateX(var(--glass-shift));
+    }
+
+    .bio-main {
+      padding: 2rem;
+    }
+
+    .bio-main p {
+      margin: 0 0 1.05rem;
+      color: var(--ink-soft);
+      font-size: 1.04rem;
+    }
+
+    .bio-main p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bio-aside {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .fact {
+      position: relative;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-left: 4px solid var(--jade);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.46), rgba(47, 111, 98, 0.08)),
+        rgba(255, 250, 239, 0.36);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 0 12px 30px rgba(49, 38, 24, 0.09);
+      backdrop-filter: blur(18px) saturate(1.18);
+      -webkit-backdrop-filter: blur(18px) saturate(1.18);
+      overflow: hidden;
+      transition: transform 260ms ease, background 260ms ease, box-shadow 260ms ease;
+    }
+
+    .fact::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent, rgba(255, 248, 234, 0.45), transparent);
+      content: "";
+      transform: translateX(-115%);
+      transition: transform 680ms ease;
+    }
+
+    .fact b {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--jade-deep);
+      font-size: 1.05rem;
+    }
+
+    .fact span {
+      color: var(--ink-soft);
+    }
+
+    .thoughts {
+      background:
+        linear-gradient(180deg, rgba(20, 62, 56, 0.96), rgba(19, 45, 41, 0.96)),
+        radial-gradient(circle at 24% 16%, rgba(244, 239, 226, 0.16), transparent 22rem);
+      color: var(--paper);
+    }
+
+    .thoughts .section-index,
+    .thoughts .section-intro {
+      color: rgba(244, 239, 226, 0.74);
+    }
+
+    .thoughts h2 {
+      color: #fff8ea;
+    }
+
+    .thought-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .thought-card {
+      position: relative;
+      min-height: 17rem;
+      padding: 1.45rem;
+      color: var(--paper);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 248, 234, 0.06) 46%, rgba(47, 111, 98, 0.12)),
+        rgba(255, 248, 234, 0.08);
+      border-color: rgba(244, 239, 226, 0.28);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+      overflow: hidden;
+    }
+
+    .thought-card::after {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, transparent 0 46%, rgba(255, 248, 234, 0.14) 50%, transparent 54% 100%);
+      content: "";
+      transform: translateX(-120%);
+      transition: transform 780ms ease;
+    }
+
+    .thought-card .glyph {
+      display: grid;
+      width: 3rem;
+      height: 3rem;
+      place-items: center;
+      margin-bottom: 1.2rem;
+      color: #fff8ea;
+      background: rgba(167, 53, 34, 0.82);
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .thought-card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .thought-card p {
+      margin: 0;
+      color: rgba(244, 239, 226, 0.76);
+      font-size: 0.98rem;
+    }
+
+    .quote-band {
+      position: relative;
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    .quote-band::before {
+      position: absolute;
+      top: 4rem;
+      right: 7vw;
+      width: 12rem;
+      height: 12rem;
+      border: 1px solid rgba(167, 123, 53, 0.25);
+      border-radius: 50%;
+      content: "";
+      animation: circleBreathe 7s ease-in-out infinite alternate;
+    }
+
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .quote-card {
+      position: relative;
+      min-height: 15rem;
+      padding: 2rem 1.6rem 1.5rem;
+      overflow: hidden;
+    }
+
+    .quote-card::before {
+      position: absolute;
+      top: -1.1rem;
+      left: 0.9rem;
+      color: rgba(167, 53, 34, 0.16);
+      content: "“";
+      font-size: 8rem;
+      line-height: 1;
+    }
+
+    .quote-card blockquote {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 1.32rem;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .quote-card p {
+      margin: 1rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+      padding-left: 1.2rem;
+    }
+
+    .timeline::before {
+      position: absolute;
+      top: 0.8rem;
+      bottom: 0.8rem;
+      left: 0;
+      width: 1px;
+      background: linear-gradient(var(--cinnabar), var(--jade));
+      content: "";
+      transform-origin: top;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      gap: 1.2rem;
+      padding: 1.25rem 1.4rem;
+    }
+
+    .timeline-item::before {
+      position: absolute;
+      top: 1.65rem;
+      left: -1.55rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      background: var(--cinnabar);
+      border: 3px solid var(--paper);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .year {
+      color: var(--cinnabar-dark);
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .event h3 {
+      margin: 0 0 0.28rem;
+      font-size: 1.15rem;
+    }
+
+    .event p {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .finale {
+      padding: 5rem 7vw 6rem;
+      color: var(--paper);
+      background:
+        linear-gradient(135deg, rgba(28, 26, 23, 0.92), rgba(20, 62, 56, 0.94)),
+        radial-gradient(circle at 78% 18%, rgba(167, 53, 34, 0.28), transparent 20rem);
+    }
+
+    .finale-inner {
+      position: relative;
+      max-width: 70rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+      padding: 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)),
+        rgba(20, 62, 56, 0.22);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(20px) saturate(1.22);
+      -webkit-backdrop-filter: blur(20px) saturate(1.22);
+      overflow: hidden;
+    }
+
+    .finale-inner::before {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(118deg, rgba(255, 255, 255, 0.22), transparent 34%, rgba(255, 248, 234, 0.08) 60%, transparent);
+      content: "";
+      opacity: 0.8;
+    }
+
+    .finale h2 {
+      max-width: 46rem;
+      color: #fff8ea;
+    }
+
+    .finale p {
+      max-width: 42rem;
+      margin: 1rem 0 0;
+      color: rgba(244, 239, 226, 0.76);
+    }
+
+    .finale-seal {
+      display: grid;
+      width: 7rem;
+      height: 7rem;
+      place-items: center;
+      color: #fff8ea;
+      background: var(--cinnabar);
+      border: 5px double rgba(255, 248, 234, 0.76);
+      transform: rotate(5deg);
+      font-size: 1.25rem;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: center;
+      animation: sealBreath 3.4s ease-in-out infinite alternate;
+    }
+
+    html.motion-ready .reveal {
+      opacity: 0;
+      transform: translateY(1.7rem);
+      transition:
+        opacity 720ms ease var(--reveal-delay, 0ms),
+        transform 720ms ease var(--reveal-delay, 0ms);
+    }
+
+    html.motion-ready .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    html.motion-ready .timeline.reveal::before {
+      transform: scaleY(0);
+      transition: transform 1000ms ease 180ms;
+    }
+
+    html.motion-ready .timeline.reveal.is-visible::before {
+      transform: scaleY(1);
+    }
+
+    @media (hover: hover) {
+      .scroll-panel:hover {
+        transform: translateY(-6px) rotate(0.4deg);
+        box-shadow: 0 34px 76px rgba(49, 38, 24, 0.24);
+      }
+
+      .bio-main:hover,
+      .quote-card:hover,
+      .timeline-item:hover {
+        transform: translateY(-6px);
+        border-color: rgba(167, 53, 34, 0.28);
+        box-shadow: 0 26px 58px rgba(49, 38, 24, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.58);
+      }
+
+      .fact:hover {
+        transform: translateX(6px);
+        background: rgba(47, 111, 98, 0.12);
+        box-shadow: 0 12px 28px rgba(49, 38, 24, 0.1);
+      }
+
+      .fact:hover::after,
+      .thought-card:hover::after {
+        transform: translateX(120%);
+      }
+
+      .thought-card:hover {
+        transform: translateY(-7px);
+        border-color: rgba(244, 239, 226, 0.32);
+        box-shadow: 0 24px 46px rgba(0, 0, 0, 0.18);
+      }
+
+      .timeline-item:hover::before {
+        background: var(--jade);
+        transform: scale(1.25);
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes navDrop {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes sealPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.72) rotate(-8deg);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.08) rotate(2deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    @keyframes strokeReveal {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes inkWash {
+      0% {
+        opacity: 1;
+        transform: scaleX(1);
+        filter: blur(0);
+      }
+      72% {
+        opacity: 0.78;
+      }
+      100% {
+        opacity: 0;
+        transform: scaleX(0.02);
+        filter: blur(10px);
+        visibility: hidden;
+      }
+    }
+
+    @keyframes paperBreath {
+      from {
+        transform: translate3d(-1.5%, -1%, 0) rotate(0.001deg);
+      }
+      to {
+        transform: translate3d(1.5%, 1%, 0) rotate(0.001deg);
+      }
+    }
+
+    @keyframes mountainMist {
+      from {
+        opacity: 0.66;
+        filter: blur(1px);
+      }
+      to {
+        opacity: 0.84;
+        filter: blur(2.2px);
+      }
+    }
+
+    @keyframes circleTrace {
+      from {
+        clip-path: inset(0 100% 0 0);
+        opacity: 0;
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes unfurl {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scaleY(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+      }
+    }
+
+    @keyframes scrollGlow {
+      from {
+        box-shadow: var(--shadow);
+      }
+      to {
+        box-shadow: 0 30px 72px rgba(49, 38, 24, 0.24);
+      }
+    }
+
+    @keyframes inkSet {
+      from {
+        opacity: 0;
+        filter: blur(6px);
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes stampIn {
+      0% {
+        opacity: 0;
+        transform: rotate(-17deg) scale(1.45);
+        filter: blur(2px);
+      }
+      70% {
+        opacity: 1;
+        transform: rotate(-7deg) scale(0.94);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: rotate(-7deg) scale(1);
+      }
+    }
+
+    @keyframes sealBreath {
+      from {
+        box-shadow: 0 0 0 rgba(167, 53, 34, 0), inset 0 0 0 1px rgba(255, 248, 234, 0.18);
+      }
+      to {
+        box-shadow: 0 0 24px rgba(167, 53, 34, 0.25), inset 0 0 0 3px rgba(255, 248, 234, 0.15);
+      }
+    }
+
+    @keyframes circleBreathe {
+      from {
+        transform: scale(0.94);
+        opacity: 0.45;
+      }
+      to {
+        transform: scale(1.08);
+        opacity: 0.9;
+      }
+    }
+
+    @media (max-width: 940px) {
+      .nav {
+        position: absolute;
+      }
+
+      .camera-rail {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+        min-height: auto;
+        padding-top: 7rem;
+      }
+
+      h1 {
+        font-size: 4.25rem;
+      }
+
+      .scroll-panel {
+        min-height: 25rem;
+      }
+
+      .vertical-title {
+        min-height: 18rem;
+      }
+
+      .vertical-title strong {
+        font-size: 2.6rem;
+      }
+
+      .section-head,
+      .bio-grid,
+      .thought-grid,
+      .quotes,
+      .finale-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .thought-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body {
+        line-height: 1.68;
+      }
+
+      .hero,
+      .section,
+      .finale {
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
+      }
+
+      h1 {
+        font-size: 3.15rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .hero-lede {
+        font-size: 1.04rem;
+      }
+
+      .scroll-panel {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+      }
+
+      .timeline {
+        padding-left: 0;
+      }
+
+      .timeline::before,
+      .timeline-item::before {
+        display: none;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+      }
+
+      .bio-main,
+      .quote-card {
+        padding: 1.35rem;
+      }
+
+      .finale-inner {
+        padding: 1.35rem;
+      }
+
+      .finale-seal {
+        width: 5.8rem;
+        height: 5.8rem;
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+
+      .ink-wash {
+        display: none;
+      }
+
+      .liquid-lens,
+      .camera-rail {
+        display: none;
+      }
+
+      .shot-scene {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ink-wash" aria-hidden="true"></div>
+  <div class="liquid-lens" aria-hidden="true"></div>
+  <div class="camera-rail" aria-hidden="true"><span></span></div>
+  <div class="site-shell">
+    <nav class="nav" aria-label="页面导航">
+      <a class="brand" href="#top" aria-label="回到首页">
+        <span class="seal-mark" aria-hidden="true">阳</span>
+        <span>王阳明</span>
+      </a>
+      <div class="nav-links">
+        <a href="#life">生平</a>
+        <a href="#thought">思想</a>
+        <a href="#quotes">名言</a>
+        <a href="#timeline">时间线</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker">明代心学宗师 · 王守仁</p>
+        <div class="hero-title-row">
+          <h1>王阳明</h1>
+          <span class="name-note">1472-1529</span>
+        </div>
+        <p class="hero-lede">
+          他把修身从书斋带回人心与世事之间。于龙场困厄中悟道，于战阵政务中印证学问，最终凝成一句最有重量的话：知行合一。
+        </p>
+        <div class="hero-actions" aria-label="快速跳转">
+          <a class="btn" href="#thought">读心学要义</a>
+          <a class="btn secondary" href="#timeline">看一生行迹</a>
+        </div>
+      </div>
+
+      <aside class="scroll-panel" aria-label="卷轴题字">
+        <div class="vertical-title">
+          <strong>知行合一</strong>
+          <span>心即理</span>
+          <span>致良知</span>
+        </div>
+        <div class="stamp">此心<br>光明</div>
+      </aside>
+    </header>
+
+    <main>
+      <section class="section" id="life">
+        <div class="section-inner">
+          <div class="section-head">
+            <div class="section-index">壹 · 生平</div>
+            <div>
+              <h2>以坎坷作炉，炼出一门入世之学</h2>
+              <p class="section-intro">
+                王阳明，名守仁，字伯安，浙江余姚人。其一生横跨仕途、讲学、军事与思想创造，既是思想家，也是行动者。
+              </p>
+            </div>
+          </div>
+
+          <div class="bio-grid">
+            <article class="bio-main">
+              <p>
+                少年王守仁志向高远，早年曾求学问道，也曾沉迷骑射兵法。二十八岁中进士后入仕，因直言触怒权宦刘瑾，被廷杖下狱，远谪贵州龙场。
+              </p>
+              <p>
+                龙场处境艰险，却成为他思想成熟的转折点。他在困顿中反复追问圣贤之道，悟出“圣人之道，吾性自足”，心学由此获得真正的精神骨架。
+              </p>
+              <p>
+                后来他出任地方官、平定叛乱、开门讲学，把“心上用功”落到真实事务之中。他的思想并不逃避世界，恰恰要求人在事上磨炼，在行动中澄明本心。
+              </p>
+            </article>
+
+            <aside class="bio-aside" aria-label="人物摘要">
+              <div class="fact">
+                <b>身份</b>
+                <span>思想家、教育家、军事家，明代心学集大成者。</span>
+              </div>
+              <div class="fact">
+                <b>核心命题</b>
+                <span>心即理、知行合一、致良知、事上磨炼。</span>
+              </div>
+              <div class="fact">
+                <b>精神气质</b>
+                <span>不离日用，不避艰难，以清明之心面对复杂现实。</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section thoughts" id="thought">
+        <div class="section-inner">
+          <div class="section-head">
+            <div class="section-index">贰 · 思想</div>
+            <div>
+              <h2>心学不是空谈，是把人放回现场</h2>
+              <p class="section-intro">
+                阳明心学最动人的地方，在于它把道德判断、真实行动与自我修炼合为一体：明白不是终点，做到才见真知。
+              </p>
+            </div>
+          </div>
+
+          <div class="thought-grid">
+            <article class="thought-card">
+              <div class="glyph">心</div>
+              <h3>心即理</h3>
+              <p>天理不在心外。真正的工夫，是让内心从私欲遮蔽中澄明起来。</p>
+            </article>
+            <article class="thought-card">
+              <div class="glyph">知</div>
+              <h3>知行合一</h3>
+              <p>真知必然指向行动；脱离行动的“知道”，只是尚未抵达内心的声音。</p>
+            </article>
+            <article class="thought-card">
+              <div class="glyph">良</div>
+              <h3>致良知</h3>
+              <p>人人自有辨是非、知善恶的良知。修养就是把这份本明扩充出来。</p>
+            </article>
+            <article class="thought-card">
+              <div class="glyph">事</div>
+              <h3>事上磨炼</h3>
+              <p>修身不只在静坐读书，也在处事、担当、抉择与困境之中完成。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quote-band" id="quotes">
+        <div class="section-inner">
+          <div class="section-head">
+            <div class="section-index">叁 · 名言</div>
+            <div>
+              <h2>几句话，像火种，也像镜子</h2>
+              <p class="section-intro">
+                阳明语录的力量在于短促而锋利：它不只是解释学问，更像是在提醒人回到当下这一念。
+              </p>
+            </div>
+          </div>
+
+          <div class="quotes">
+            <article class="quote-card">
+              <blockquote>知是行之始，行是知之成。</blockquote>
+              <p>认识与实践不是两件事，而是一件事的起点与完成。</p>
+            </article>
+            <article class="quote-card">
+              <blockquote>破山中贼易，破心中贼难。</blockquote>
+              <p>真正难克服的，常常不是外在敌手，而是内心的遮蔽。</p>
+            </article>
+            <article class="quote-card">
+              <blockquote>此心光明，亦复何言。</blockquote>
+              <p>一生学问与行动的归处，是对内心光明的笃定。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="timeline">
+        <div class="section-inner">
+          <div class="section-head">
+            <div class="section-index">肆 · 时间线</div>
+            <div>
+              <h2>从少年立志，到龙场悟道，再到立功讲学</h2>
+              <p class="section-intro">
+                这条时间线不是简单履历，而是一条思想被现实不断锤炼的路径。
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="year">1472</div>
+              <div class="event">
+                <h3>出生于浙江余姚</h3>
+                <p>名守仁，字伯安，后世尊称阳明先生。</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="year">1499</div>
+              <div class="event">
+                <h3>中进士，步入仕途</h3>
+                <p>在官场与学问之间，逐渐形成经世致用的实践关怀。</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="year">1506</div>
+              <div class="event">
+                <h3>因直言被贬龙场</h3>
+                <p>遭廷杖、下狱，后谪贵州龙场驿丞，人生跌入低谷。</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="year">1508</div>
+              <div class="event">
+                <h3>龙场悟道</h3>
+                <p>困厄之中顿悟“圣人之道，吾性自足”，心学由此展开。</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="year">1519</div>
+              <div class="event">
+                <h3>平定宁王之乱</h3>
+                <p>以谋略和决断平乱，成为“知行合一”最醒目的历史注脚。</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="year">1529</div>
+              <div class="event">
+                <h3>病逝于归途</h3>
+                <p>其学问经弟子传播，深刻影响明清思想与东亚儒学传统。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="finale">
+      <div class="finale-inner">
+        <div>
+          <h2>学问若不能照见此刻，便还没有真正进入生命。</h2>
+          <p>
+            王阳明留给后人的，不只是几条思想命题，而是一种把内心、判断与行动重新合拢的方式。
+          </p>
+        </div>
+        <div class="finale-seal">知行<br>合一</div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reducedMotion) return;
+
+      document.documentElement.classList.add("motion-ready");
+
+      const revealItems = [
+        ...document.querySelectorAll(".section-head, .bio-main, .fact, .thought-card, .quote-card, .timeline, .timeline-item, .finale-inner")
+      ];
+
+      revealItems.forEach((item, index) => {
+        item.classList.add("reveal");
+        item.style.setProperty("--reveal-delay", `${Math.min((index % 5) * 80, 320)}ms`);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.16,
+        rootMargin: "0px 0px -8% 0px"
+      });
+
+      revealItems.forEach((item) => observer.observe(item));
+
+      const hero = document.querySelector(".hero");
+      const scrollPanel = document.querySelector(".scroll-panel");
+      const root = document.documentElement;
+      const shotScenes = [...document.querySelectorAll(".hero, main .section, .finale")];
+      shotScenes.forEach((scene) => scene.classList.add("shot-scene"));
+      let ticking = false;
+
+      const updateCamera = () => {
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const y = window.scrollY;
+        const progress = Math.min(Math.max(y / maxScroll, 0), 1);
+
+        root.style.setProperty("--journey", progress.toFixed(4));
+        root.style.setProperty("--lens-shift", `${(progress - 0.5) * -120}px`);
+        root.style.setProperty("--glass-shift", `${(progress - 0.5) * 18}%`);
+
+        if (hero) hero.style.setProperty("--hero-drift", `${Math.min(y * 0.08, 26)}px`);
+        if (scrollPanel) scrollPanel.style.setProperty("--scroll-drift", `${Math.min(y * 0.035, 14)}px`);
+
+        shotScenes.forEach((scene) => {
+          const rect = scene.getBoundingClientRect();
+          const sceneCenter = rect.top + rect.height / 2;
+          const viewportCenter = window.innerHeight / 2;
+          const distance = (sceneCenter - viewportCenter) / window.innerHeight;
+          const clamped = Math.max(-1, Math.min(1, distance));
+          const scale = 1 - Math.abs(clamped) * 0.022;
+          const offset = -clamped * 18;
+
+          scene.style.setProperty("--shot-y", `${offset.toFixed(2)}px`);
+          scene.style.setProperty("--shot-scale", scale.toFixed(4));
+        });
+      };
+
+      updateCamera();
+
+      window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateCamera();
+          ticking = false;
+        });
+      }, { passive: true });
+
+      window.addEventListener("resize", updateCamera);
+    })();
+  </script>
+</body>
+</html>
