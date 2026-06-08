@@ -32,6 +32,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 5.5rem;
     }
 
     body {
@@ -162,7 +163,7 @@
       top: 0;
       right: 0;
       left: 0;
-      z-index: 20;
+      z-index: 70;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -174,7 +175,7 @@
         rgba(255, 255, 255, 0.08);
       border-bottom: 1px solid rgba(255, 255, 255, 0.42);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46);
-      backdrop-filter: blur(20px) saturate(1.28);
+      backdrop-filter: blur(3px) saturate(1.5);
       -webkit-backdrop-filter: blur(20px) saturate(1.28);
       animation: navDrop 720ms ease-out both;
     }
@@ -498,6 +499,12 @@
       padding: 5.8rem 7vw;
       --shot-y: 0px;
       --shot-scale: 1;
+    }
+
+    #top,
+    .section,
+    .finale {
+      scroll-margin-top: 5.5rem;
     }
 
     .section-inner {
@@ -1093,7 +1100,8 @@
 
     @media (max-width: 940px) {
       .nav {
-        position: absolute;
+        position: fixed;
+        padding: 0.85rem 1.25rem;
       }
 
       .camera-rail {
@@ -1231,20 +1239,19 @@
   <div class="ink-wash" aria-hidden="true"></div>
   <div class="liquid-lens" aria-hidden="true"></div>
   <div class="camera-rail" aria-hidden="true"><span></span></div>
+  <nav class="nav" aria-label="页面导航">
+    <a class="brand" href="#top" aria-label="回到首页">
+      <span class="seal-mark" aria-hidden="true">阳</span>
+      <span>王阳明</span>
+    </a>
+    <div class="nav-links">
+      <a href="#life">生平</a>
+      <a href="#thought">思想</a>
+      <a href="#quotes">名言</a>
+      <a href="#timeline">时间线</a>
+    </div>
+  </nav>
   <div class="site-shell">
-    <nav class="nav" aria-label="页面导航">
-      <a class="brand" href="#top" aria-label="回到首页">
-        <span class="seal-mark" aria-hidden="true">阳</span>
-        <span>王阳明</span>
-      </a>
-      <div class="nav-links">
-        <a href="#life">生平</a>
-        <a href="#thought">思想</a>
-        <a href="#quotes">名言</a>
-        <a href="#timeline">时间线</a>
-      </div>
-    </nav>
-
     <header class="hero" id="top">
       <div class="hero-copy">
         <p class="kicker">明代心学宗师 · 王守仁</p>
